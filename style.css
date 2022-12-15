@@ -1,0 +1,107 @@
+body {
+  display: flex;
+  background: var(--color-green-dark);
+  justify-content: center;
+  overflow: hidden;
+}
+
+.road {
+  background: var(--color-gray-48);
+  width: 300px;
+  height: 100vh;
+}
+
+.car {
+  position: absolute;
+  width: 50px;
+  transform: translateY(70vh);
+}
+
+.tree {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  z-index: 10;
+}
+
+.tree2 {
+  transform: translate(200px, 90vh);
+  width: 170px;
+  height: 170px;
+}
+.tree3 {
+  transform: translate(210px, 45vh);
+  width: 200px;
+  height: 200px;
+}
+.tree4 {
+  transform: translate(175px, -5vh);
+  width: 185px;
+  height: 185px;
+}
+.tree5 {
+  transform: translate(-210px, -30vh);
+  width: 270px;
+  height: 270px;
+}
+.tree6 {
+  transform: translate(-200px, 25vh);
+  width: 225px;
+  height: 225px;
+}
+.tree7 {
+  transform: translate(-250px, 65vh);
+  width: 210px;
+  height: 210px;
+}
+.tree8 {
+  transform: translate(-220px, 40vh);
+  width: 30px;
+  height: 30px;
+}
+.tree1 {
+  transform: translate(300, 15vh);
+  width: 30px;
+  height: 30px;
+}
+
+.game-button {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  transition: var(--animation);
+  z-index: 20;
+}
+
+.game-button:hover {
+  transform: scale(1.2);
+}
+
+.game-button img {
+  width: 75px;
+  height: 65px;
+}
+
+.arrow {
+  position: absolute;
+  width: 50px;
+  transform: translate(-50px, -300px);
+}
+.sign {
+  position: absolute;
+  width: 80px;
+  transform: translate(-50px, -100px);
+}
+.coin {
+  position: absolute;
+  width: 50px;
+  transform: translate(50px, -100px);
+}
+
+.game-button .start {
+  display: none;
+}
