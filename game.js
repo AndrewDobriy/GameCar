@@ -7,25 +7,6 @@
   const car = document.querySelector('.car');
   const carWidth = car.clientWidth / 2;
   const carHeight = car.clientHeight;
-
-  const coin = document.querySelector('.coin');
-  const coinCoord = getCoords(coin);
-  const coinWidth = coin.clientWidth / 2;
-
-  const sign = document.querySelector('.sign');
-  const signCoord = getCoords(sign);
-  const signWidth = sign.clientWidth / 2;
-
-  const arrow = document.querySelector('.arrow');
-  const arrowCoord = getCoords(arrow);
-  const arrowWidth = arrow.clientWidth / 2;
-
-  const road = document.querySelector('.road');
-  const roadHeidght = road.clientHeight;
-  const roadWidth = road.clientWidth / 2;
-  const trees = document.querySelectorAll('.tree');
-
-  const treesCoords = [];
   const carCoords = getCoords(car);
   const carMoveInfo = {
     top: null,
@@ -33,6 +14,26 @@
     left: null,
     right: null,
   };
+
+  // const arrow = document.querySelector('.arrow');
+  // const arrowCoord = getCoords(arrow);
+  // const arrowWidth = arrow.clientWidth / 2;
+
+  // const sign = document.querySelector('.sign');
+  // const signCoord = getCoords(sign);
+  // const signWidth = sign.clientWidth / 2;
+
+  const coin = document.querySelector('.coin');
+  const coinCoord = getCoords(coin);
+  const coinWidth = coin.clientWidth / 2;
+  const coinHeight = coin.clientHeight;
+
+  const road = document.querySelector('.road');
+  const roadHeidght = road.clientHeight;
+  const roadWidth = road.clientWidth / 2;
+  const trees = document.querySelectorAll('.tree');
+
+  const treesCoords = [];
 
   for (let i = 0; i < trees.length; i++) {
     const tree = trees[i];
@@ -42,15 +43,14 @@
   }
 
   // trees.forEach((elem) => {
-  //     const tree = elem;
-  //     const coordsTree = getCoords(tree);
+  //     const coordsTree = getCoords(elem);
   //     treesCoords.push(coordsTree);
   // });
 
   document.addEventListener('keydown', (event) => {
-    if (isPause) {
-      return; // Если игра на паузе, то код ниже не начнет выполняться
-    }
+    // if (isPause) {
+    //   return; // Если игра на паузе, то код ниже не начнет выполняться
+    // }
 
     const code = event.code;
     if (code === 'ArrowUp' || (code === 'KeyW' && carMoveInfo.top === null)) {
@@ -93,9 +93,9 @@
 
   function carMoveToTop() {
     const newY = carCoords.y - 5;
-    if (newY < 0) {
-      return;
-    }
+    // if (newY < 0) {
+    //   return;
+    // }
     carCoords.y = newY;
     carMove(carCoords.x, newY);
     carMoveInfo.top = requestAnimationFrame(carMoveToTop);
@@ -103,9 +103,9 @@
 
   function carMoveToBottom() {
     const newY = carCoords.y + 5;
-    if (newY + carHeight > roadHeidght) {
-      return;
-    }
+    // if (newY + carHeight > roadHeidght) {
+    //   return;
+    // }
     carCoords.y = newY;
     carMove(carCoords.x, newY);
     carMoveInfo.bottom = requestAnimationFrame(carMoveToBottom);
@@ -114,9 +114,9 @@
   function carMoveToLeft() {
     const newX = carCoords.x - 5;
 
-    if (newX < -roadWidth + carWidth) {
-      return;
-    }
+    // if (newX < -roadWidth + carWidth) {
+    //   return;
+    // }
     carCoords.x = newX;
     carMove(newX, carCoords.y);
     carMoveInfo.left = requestAnimationFrame(carMoveToLeft);
@@ -124,15 +124,16 @@
 
   function carMoveToRight() {
     const newX = carCoords.x + 5;
-    if (newX > roadWidth - carWidth) {
-      return;
-    }
+    // if (newX > roadWidth - carWidth) {
+    //   return;
+    // }
     carCoords.x = newX;
     carMove(newX, carCoords.y);
     carMoveInfo.right = requestAnimationFrame(carMoveToRight);
   }
 
   function carMove(x, y) {
+    console.log(hasCollision());
     car.style.transform = `translate(${x}px, ${y}px)`;
   }
 
@@ -141,8 +142,8 @@
   function startGame() {
     treesAnimation();
     coinAnimation();
-    signAnimation();
-    arrowAnimation();
+    // signAnimation();
+    // arrowAnimation();
     animationId = requestAnimationFrame(startGame);
   }
 
@@ -190,45 +191,45 @@
     coin.style.transform = `translate(${newXCoord}px, ${newYCoord}px)`;
   }
 
-  function signAnimation() {
-    let newYCoord = signCoord.y + speed;
-    let newXCoord = signCoord.x;
+  // function signAnimation() {
+  //   let newYCoord = signCoord.y + speed;
+  //   let newXCoord = signCoord.x;
 
-    if (newYCoord > window.innerHeight) {
-      newYCoord = -200;
+  //   if (newYCoord > window.innerHeight) {
+  //     newYCoord = -200;
 
-      const direction = parseInt(Math.random() * 2);
-      const randomXCoord = parseInt(
-        Math.random() * (roadWidth + 1 - signWidth)
-      );
+  //     const direction = parseInt(Math.random() * 2);
+  //     const randomXCoord = parseInt(
+  //       Math.random() * (roadWidth + 1 - signWidth)
+  //     );
 
-      newXCoord = direction === 0 ? -randomXCoord : randomXCoord;
-    }
+  //     newXCoord = direction === 0 ? -randomXCoord : randomXCoord;
+  //   }
 
-    signCoord.y = newYCoord;
-    signCoord.x = newXCoord;
-    sign.style.transform = `translate(${newXCoord}px, ${newYCoord}px)`;
-  }
+  //   signCoord.y = newYCoord;
+  //   signCoord.x = newXCoord;
+  //   sign.style.transform = `translate(${newXCoord}px, ${newYCoord}px)`;
+  // }
 
-  function arrowAnimation() {
-    let newYCoord = arrowCoord.y + speed;
-    let newXCoord = arrowCoord.x;
+  // function arrowAnimation() {
+  //   let newYCoord = arrowCoord.y + speed;
+  //   let newXCoord = arrowCoord.x;
 
-    if (newYCoord > window.innerHeight) {
-      newYCoord = -1000;
+  //   if (newYCoord > window.innerHeight) {
+  //     newYCoord = -1000;
 
-      const direction = parseInt(Math.random() * 2);
-      const randomXCoord = parseInt(
-        Math.random() * (roadWidth + 1 - arrowWidth)
-      );
+  //     const direction = parseInt(Math.random() * 2);
+  //     const randomXCoord = parseInt(
+  //       Math.random() * (roadWidth + 1 - arrowWidth)
+  //     );
 
-      newXCoord = direction === 0 ? -randomXCoord : randomXCoord;
-    }
+  //     newXCoord = direction === 0 ? -randomXCoord : randomXCoord;
+  //   }
 
-    arrowCoord.y = newYCoord;
-    arrowCoord.x = newXCoord;
-    arrow.style.transform = `translate(${newXCoord}px, ${newYCoord}px)`;
-  }
+  //   arrowCoord.y = newYCoord;
+  //   arrowCoord.x = newXCoord;
+  //   arrow.style.transform = `translate(${newXCoord}px, ${newYCoord}px)`;
+  // }
 
   function getCoords(element) {
     const matrix = window.getComputedStyle(element).transform;
@@ -242,6 +243,28 @@
       x: numeriсX,
       y: numeriсY,
     };
+  }
+
+  function hasCollision() {
+    const carYTop = carCoords.y;
+    const carYBottom = carCoords.y + carHeight;
+
+    const carXLeft = carCoords.x;
+    const carXRight = carCoords.x + carWidth * 2;
+
+    const coinYTop = coinCoord.y;
+    const coinYBotton = coinCoord.y + coinHeight;
+    const coinXLeft = coinCoord.x;
+    const coinXRight = coinCoord.x + coinWidth * 2;
+
+    if (carYTop > coinYBotton || carYBottom < coinYTop) {
+      return false;
+    }
+
+    if (carXLeft > coinXRight || carXRight < coinXLeft) {
+      return false;
+    }
+    return true;
   }
 
   const gameButton = document.querySelector('.game-button');
